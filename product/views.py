@@ -1,41 +1,48 @@
-from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
-
+from django.shortcuts import render, get_object_or_404
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from .models import Category, Product, Review
 from .serializers import CategorySerializer, ProductSerializer, ReviewSerializer
 
 
+@api_view(['GET'])
 def category_list(request):
     categories = Category.objects.all()
-    serializer = CategorySerializer(categories, many=True)
-    return JsonResponse(serializer.data, safe=False)
+    data = CategorySerializer(categories, many=True)
+    return Response(data=data.data, status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
 def category_detail(request, id):
     category = get_object_or_404(Category, id=id)
-    serializer = CategorySerializer(category)
-    return JsonResponse(serializer.data)
+    data = CategorySerializer(category)
+    return Response(data=data.data, status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
 def product_list(request):
     products = Product.objects.all()
-    serializer = ProductSerializer(products, many=True)
-    return JsonResponse(serializer.data, safe=False)
+    data = ProductSerializer(products, many=True)
+    return Response(data=data.data, status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
 def product_detail(request, id):
     product = get_object_or_404(Product, id=id)
-    serializer = ProductSerializer(product)
-    return JsonResponse(serializer.data)
+    data = ProductSerializer(product)
+    return Response(data=data.data, status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
 def review_list(request):
     reviews = Review.objects.all()
-    serializer = ReviewSerializer(reviews, many=True)
-    return JsonResponse(serializer.data, safe=False)
+    data = ReviewSerializer(reviews, many=True)
+    return Response(data=data.data, status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
 def review_detail(request, id):
     review = get_object_or_404(Review, id=id)
-    serializer = ReviewSerializer(review)
-    return JsonResponse(serializer.data)
+    data = ReviewSerializer(review)
+    return Response(data=data.data, status=status.HTTP_200_OK)
