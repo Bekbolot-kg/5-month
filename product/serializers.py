@@ -8,16 +8,15 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'products_count']
 
 
-class ProductSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Product
-        fields = ['id', 'title', 'description', 'price', 'get_rating', 'get_category_name']
-
-
 class ReviewSerializer(serializers.ModelSerializer):
-    product = ProductSerializer()
-
     class Meta:
         model = Review
         fields = '__all__'
+
+class ProductSerializer(serializers.ModelSerializer):
+    reviews = ReviewSerializer(many=True)
+    class Meta:
+        model = Product
+        fields = ['id', 'title', 'description', 'price', 'get_rating', 'get_category_name', 'reviews']
+
+
