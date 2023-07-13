@@ -1,12 +1,15 @@
-from django.urls import path
-from .views import *
+from django.urls import include, path
+from rest_framework import routers
 
-app_name = 'product'
+from .views import ProductViewSet, ColorViewSet
+
+router = routers.DefaultRouter()
+router.register(r'product', ProductViewSet)
+
+color_router = routers.SimpleRouter()
+color_router.register(r'product/<int:product_pk>/colors', ColorViewSet, basename='product-colors')
+
 urlpatterns = [
-    path('api/v1/category_model/', CategoryListAPIView.as_view(), name='category-list'),
-    path('api/v1/category_model/<int:pk>/', CategoryDetailAPIView.as_view(), name='category-detail'),
-    path('api/v1/product_model/', ProductListAPIView.as_view(), name='product-list'),
-    path('api/v1/product_model/<int:pk>/', ProductDetailAPIView.as_view(), name='product-detail'),
-    path('api/v1/review_model/', ReviewListAPIView.as_view(), name='review-list'),
-    path('api/v1/review_model/<int:pk>/', ReviewDetailAPIView.as_view(), name='review-detail'),
+    path('', include(router.urls)),
+    path('', include(color_router.urls)),
 ]
