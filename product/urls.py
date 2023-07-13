@@ -1,15 +1,16 @@
-from django.urls import include, path
 from rest_framework import routers
-
-from .views import ProductViewSet, ColorViewSet
+from django.urls import path, include
+from .views import CategoryViewSet, ProductViewSet, ReviewViewSet
 
 router = routers.DefaultRouter()
-router.register(r'product', ProductViewSet)
+router.register(r'product', CategoryViewSet, basename='product')
+router.register(r'product', ProductViewSet, basename='category')
+router.register(r'review', ReviewViewSet, basename='review')
+router.register(r'colors', ReviewViewSet, basename='colors')
 
-color_router = routers.SimpleRouter()
-color_router.register(r'product/<int:product_pk>/colors', ColorViewSet, basename='product-colors')
+
+app_name = 'product'
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('', include(color_router.urls)),
 ]
