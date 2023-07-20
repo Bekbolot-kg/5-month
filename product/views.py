@@ -8,10 +8,10 @@ from .models import *
 
 
 class ProductPagination(PageNumberPagination):
-    page_size = 7  # Количество объектов на каждой странице
-    page_query_param = 'page'  # Параметр запроса, указывающий номер страницы
-    page_size_query_param = 'page_size'  # Параметр запроса, указывающий количество объектов на странице
-    max_page_size = 100  # Максимальное количество объектов, которые можно запросить на странице
+    page_size = 7
+    page_query_param = 'page'
+    page_size_query_param = 'page_size'
+    max_page_size = 100
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
