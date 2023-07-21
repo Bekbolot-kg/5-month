@@ -1,0 +1,9 @@
+[
+  {
+    "model": "product.color",
+    "pk": 1,
+    "fields": {
+      "name": "стеклянный"
+    }
+  }
+]

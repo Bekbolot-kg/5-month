@@ -1,0 +1,11 @@
+[
+  {
+    "model": "product.review",
+    "pk": 1,
+    "fields": {
+      "text": "качество хороший",
+      "product": 1,
+      "stars": 5
+    }
+  }
+]
